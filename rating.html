@@ -55,16 +55,15 @@
             border-radius: 5px;
             height: 60px;
             resize: none;
-            overflow-y: scroll; /* Enable scrolling */
+            overflow-y: scroll;
         }
 
-        /* Hide the scrollbar but keep scrolling enabled */
         textarea::-webkit-scrollbar {
             width: 0;
         }
 
         textarea::-moz-scrollbar {
-            display: none; /* For Firefox */
+            display: none; 
         }
 
         button {
@@ -142,10 +141,8 @@
         let totalRatings = 0;
         let ratingCount = 0;
 
-        // Initialize: Show form on page load
         document.getElementById('form-container').style.display = 'block';
 
-        // Add event listeners to circles for rating
         document.querySelectorAll('.circle').forEach(circle => {
             circle.addEventListener('click', function () {
                 selectedRating = parseInt(this.getAttribute('data-rating'));
@@ -154,7 +151,6 @@
         });
         
 
-        // Update the rating display
         function updateRatingDisplay(rating) {
             document.querySelectorAll('.circle').forEach(circle => {
                 circle.classList.remove('active');
@@ -167,7 +163,6 @@
             document.getElementById('rating-value').innerText = `Rating: ${rating}/5`;
         }
 
-        // Fetch and display the overall rating on form load
 async function fetchOverallRating() {
     try {
         const response = await fetch('http://localhost:3000/average-rating');
@@ -176,16 +171,14 @@ async function fetchOverallRating() {
             document.getElementById('overall-rating').innerText = `Overall Rating: ${data.averageRating}/5`;
         } else {
             console.error('Failed to fetch overall rating.');
-        }
+        } 
     } catch (error) {
         console.error('Error fetching overall rating:', error);
     }
 }
 
-// Call fetchOverallRating on form load
 window.onload = fetchOverallRating;
 
-// Refresh overall rating after feedback submission
 async function submitFeedback() {
     const name = document.getElementById('enterName').value.trim();
     const feedbackText = document.getElementById('feedback').value.trim();
@@ -211,7 +204,7 @@ async function submitFeedback() {
             document.getElementById('feedback').value = '';
             document.getElementById('enterName').value = '';
             updateRatingDisplay(0);
-            fetchOverallRating(); // Refresh overall rating
+            fetchOverallRating(); 
         } else {
             alert('Failed to submit feedback.');
         }
